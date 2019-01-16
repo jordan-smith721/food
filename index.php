@@ -77,15 +77,36 @@ $f3->route('GET /dinner/steak', function()
 //define a route with a parameter
 $f3->route('GET /@food', function($f3, $params)
 {
-    print_r($params);
    echo "<h3>I like " . $params['food'] . "</h3>";
 });
 
 //define a route with multiple parameters
 $f3->route('GET /@meal/@food', function($f3, $params)
 {
-    print_r($params);
-    echo "<h3>I like " . $params['food'] . " for " . $params['meal'] . "</h3>";
+
+    $validMeals = ['breakfast', 'lunch', 'dinner'];
+    $meal = $params['meal'];
+    //check validity
+    if(!in_array($meal, $validMeals))
+    {
+            echo "<h3> Sorry, we don't serve $meal</h3>";
+    }
+    else
+    {
+        switch($meal)
+        {
+            case 'breakfast':
+                $time = " in the morning";
+                break;
+            case 'lunch':
+                $time = "at noon";
+                break;
+            case 'dinner':
+                $time = "in the evening";
+        }
+
+        echo "<h3>I like " . $params['food'] . " $time</h3>";
+    }
 });
 
 //Define an order form route
@@ -96,10 +117,30 @@ $f3->route('GET /order', function()
 });
 
 //Define an order-process route
-$f3->route('POST /order-process', function()
+$f3->route('POST /order-process', function($f3)
 {
-    print_r($_POST);
-    echo "<p>Processing Order</p>";
+    $food = $_POST['food'];
+    echo "You ordered $food";
+
+    if ($food == 'pizza')
+    {
+        //reroute to pizza page
+        $f3->reroute("dinner/pizza");
+    }
+    elseif($food == 'steak')
+    {
+        //reroute to pizza page
+        $f3->reroute("dinner/steak");
+    }
+    elseif($food == 'tacos')
+    {
+        //reroute to pizza page
+        $f3->reroute("dinner/tacos");
+    }
+    else
+    {
+        $f3->reroute("");
+    }
 });
 
 
