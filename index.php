@@ -88,6 +88,19 @@ $f3->route('GET /@meal/@food', function($f3, $params)
     echo "<h3>I like " . $params['food'] . " for " . $params['meal'] . "</h3>";
 });
 
+//Define an order form route
+$f3->route('GET /order', function()
+{
+    $view = new View();
+    echo $view->render('views/form1.html');
+});
+
+//Define an order-process route
+$f3->route('POST /order-process', function()
+{
+    print_r($_POST);
+    echo "<p>Processing Order</p>";
+});
 
 
 //Run fat free
