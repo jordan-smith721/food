@@ -18,12 +18,31 @@ $f3 = Base::instance();
 //Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
 
+$f3->route('GET /', function($f3)
+{
+   //save variables
+    $f3->set('username', 'jshmo');
+    $f3->set('password', sha1('Password01'));
+    $f3->set('title', 'Working with templates');
+
+    //load template
+    //$template = new Template();
+    //echo $template->render('views/info.html');
+
+    //alternate syntax for above
+    echo Template::instance()->render('views/info.html');
+});
+
+
+/*
 //Define a default route
 $f3->route('GET /', function ()
 {
     $view = new View();
     echo $view->render('views/home.html');
 });
+
+*/
 
 //Define a 'breakfast' route
 $f3->route('GET /breakfast', function()
@@ -140,6 +159,26 @@ $f3->route('POST /order-process', function($f3)
     else
     {
         $f3->reroute("");
+    }
+});
+
+//Define a dessert route
+$f3->route('GET /dessert/@dessert', function($f3, $params)
+{
+    $dessert = $params['dessert'];
+
+    if($dessert == 'pie')
+    {
+        $view = new View();
+        echo $view->render('views/pie.html');
+    }
+    elseif($dessert == 'cake' OR $dessert == 'cookies' OR $dessert == 'brownies')
+    {
+        echo "<h3>I like $dessert";
+    }
+    else
+    {
+        $f3->error(404);
     }
 });
 
