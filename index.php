@@ -26,6 +26,10 @@ $f3->route('GET /', function($f3)
     $f3->set('title', 'Working with templates');
     $f3->set('temp', 67);
     $f3->set('radius', 10);
+    $f3->set('fruits', array('apple', 'orange', 'banana'));
+    $f3->set('bookmarks', array('CNN'=>'http://cnn.com',
+            'Cool Portfolio'=>'http://jsmith.greenriverdev.com',
+            'school'=>'http://greenriver.edu'));
 
     //load template
     //$template = new Template();

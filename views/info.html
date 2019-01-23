@@ -10,5 +10,19 @@
 <p>The temperature is {{@temp}} fahrenheit... Or in celcius: {{ round((@temp-32) * (5.0/9.0), 2) }} degrees</p>
 
 <p>The circumference of a circle with the radius of {{@radius}} is {{ (2*pi())* @radius }}</p>
+
+<h3>Fruits</h3>
+<ul>
+<repeat group="{{ @fruits }}" value="{{ @fruit }}">
+    <li>{{ trim(@fruit) }}</li>
+</repeat>
+</ul>
+<h3>Bookmarks</h3>
+<ul>
+    <repeat group="{{ @bookmarks}}" value="{{@text=>@url}}">
+        <li><a target="_blank" href="{{@url}}">{{@text}}</a></li>
+    </repeat>
+</ul>
+
 </body>
 </html>
