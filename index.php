@@ -25,6 +25,7 @@ $f3->route('GET /', function($f3)
     $f3->set('password', sha1('Password01'));
     $f3->set('title', 'Working with templates');
     $f3->set('temp', 67);
+    $f3->set('radius', 10);
 
     //load template
     //$template = new Template();
